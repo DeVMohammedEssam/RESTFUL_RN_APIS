@@ -22,7 +22,7 @@ router.post("/signup", (req, res) => {
         });
         newUser
           .save()
-          .then(userData => res.status(200))
+          .then(userData => res.status(200).json({ success: true }))
           .catch(error => res.status(500).json({ error }));
       });
     }

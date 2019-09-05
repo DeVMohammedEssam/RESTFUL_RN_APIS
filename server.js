@@ -29,9 +29,8 @@ mongoose
 app.listen(PORT, "localhost", () => {
   console.log("app is running on port", PORT);
 });
-app.get("/test", (req, res) => {
-  res.json({ worked: true });
-  console.log("called successfulllllllyyyy");
+app.get("/", (req, res) => {
+  res.send("welcome to rn RESTFUL APIS");
 });
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 

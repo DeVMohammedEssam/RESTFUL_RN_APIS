@@ -17,8 +17,12 @@ app.use(passport.initialize());
 /* mongo db connection  */
 const mongoose = require("mongoose");
 const { mongoUri } = require("./config/keys");
+
 mongoose
-  .connect(mongoUri, { useNewUrlParser: true })
+  .connect(
+    "mongodb+srv://mohammedEssam:1112mohammed@cluster0-wfibb.mongodb.net/tripShare?retryWrites=true&w=majority",
+    { useNewUrlParser: true }
+  )
   .then(() => console.log("connected to mongo"))
   .catch(err => console.log(err));
 /* app config */
@@ -26,8 +30,8 @@ app.listen(PORT, "localhost", () => {
   console.log("app is running on port", PORT);
 });
 app.get("/test", (req, res) => {
-  res.json({worked:true});
-  console.log("called successfulllllllyyyy")
+  res.json({ worked: true });
+  console.log("called successfulllllllyyyy");
 });
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 

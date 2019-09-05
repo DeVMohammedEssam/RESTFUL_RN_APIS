@@ -23,7 +23,7 @@ mongoose
   .then(() => console.log("connected to mongo"))
   .catch(err => console.log(err));
 /* app config */
-app.listen(PORT, "localhost", () => {
+app.listen(PORT, () => {
   console.log("app is running on port", PORT);
 });
 app.get("/", (req, res) => {

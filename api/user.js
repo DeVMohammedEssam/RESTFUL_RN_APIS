@@ -10,7 +10,8 @@ const { secretOrKey } = require("../config/keys");
 @access:    public
 */
 router.post("/signup", (req, res) => {
-  const { password, email } = req.body;
+  let { password, email } = req.body;
+  email = email.toString().toLowerCase();
   User.findOne({ email }).then(user => {
     if (user) {
       res.status(409).json({ error: "user already exists" });
@@ -35,8 +36,8 @@ router.post("/signup", (req, res) => {
 @access:    public
 */
 router.post("/login", (req, res) => {
-  console.log(req.body);
-  const { email, password } = req.body;
+  let { email, password } = req.body;
+  email = email.toString().toLowerCase();
   User.findOne({ email }).then(user => {
     if (!user) {
       res.status(404).json({ error: "email not found" });

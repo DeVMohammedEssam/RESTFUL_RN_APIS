@@ -24,7 +24,7 @@ const upload = multer({
       cb(null, false);
     }
   },
-  limits: { fileSize: 1024 * 1024 } //1 MB
+  limits: { fileSize: 1024 * 1024 * 4 } //4 MB
 });
 
 /* 
@@ -32,14 +32,13 @@ const upload = multer({
 @method:    POST
 @access:    Private 
 */
-router.get(
+router.post(
   "/add",
   passport.authenticate("jwt", { session: false }),
   upload.single("image"),
   (req, res) => {
-    const { name, image } = req.body;
     const newPlace = new Place({
-      name,
+      name: req.body.name,
       image: req.file.path
     });
     newPlace
@@ -62,6 +61,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Place.find({})
+      .sort({ date: "-1" })
       .then(places => {
         if (!places) res.status(404).json({ error: "no places found" });
         else {
